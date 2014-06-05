@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     uglify: {
       build: {
-        src: 'assets-dev/js/functions.js',
+        src: 'src/js/functions.js',
         dest: 'assets/js/functions.min.js'
       }
     },
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
       dynamic: {
         files: [{
             expand: true,
-            cwd: 'assets-dev/images/',
+            cwd: 'src/images/',
             src: ['**/*.{png,jpg,gif}'],
             dest: 'assets/images/'
         }]
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
             compress: true
         },
         files: {
-            'assets/css/style.min.css': 'assets-dev/less/style.less'
+            'assets/css/style.min.css': 'src/less/style.less'
         }
       } 
     },
@@ -42,17 +42,17 @@ module.exports = function(grunt) {
           port: 21,
           authKey: 'key'
         },
-        src: '/Applications/MAMP/htdocs/proyecto-simple/',
-        dest: '/public_html/proyecto-simple/',
+        src: '/Applications/MAMP/htdocs/simple-grunt-workflow/',
+        dest: '/public_html/simple-grunt-workflow/',
         exclusions: [
-          '/Applications/MAMP/htdocs/proyecto-simple/**/.*',
-          '/Applications/MAMP/htdocs/proyecto-simple/**/.*/', 
-          '/Applications/MAMP/htdocs/proyecto-simple/**/Thumbs.db',
-          '/Applications/MAMP/htdocs/proyecto-simple/**/ftppass',
-          '/Applications/MAMP/htdocs/proyecto-simple/node_modules',
-          '/Applications/MAMP/htdocs/proyecto-simple/*.json',
-          '/Applications/MAMP/htdocs/proyecto-simple/Gruntfile.js',
-          '/Applications/MAMP/htdocs/proyecto-simple/assets-dev'
+          '/Applications/MAMP/htdocs/simple-grunt-workflow/**/.*',
+          '/Applications/MAMP/htdocs/simple-grunt-workflow/**/.*/', 
+          '/Applications/MAMP/htdocs/simple-grunt-workflow/**/Thumbs.db',
+          '/Applications/MAMP/htdocs/simple-grunt-workflow/**/ftppass',
+          '/Applications/MAMP/htdocs/simple-grunt-workflow/node_modules',
+          '/Applications/MAMP/htdocs/simple-grunt-workflow/*.json',
+          '/Applications/MAMP/htdocs/simple-grunt-workflow/Gruntfile.js',
+          '/Applications/MAMP/htdocs/simple-grunt-workflow/src'
         ]
       }
     },
@@ -61,15 +61,15 @@ module.exports = function(grunt) {
         livereload: true
       },
       scripts: {
-        files: ['assets-dev/js/*.js'],
-        tasks: ['uglify'],
+        files: ['src/js/*.js'],
+        tasks: ['newer:uglify'],
         options: {
             spawn: false
         }
       },
       css: {
-        files: ['assets-dev/less/*.less'],
-        tasks: ['less'],
+        files: ['src/less/*.less'],
+        tasks: ['newer:less'],
         options: {
           spawn: false
         }
@@ -81,8 +81,8 @@ module.exports = function(grunt) {
         }
       },
       another: {
-        files: ['assets-dev/images/*.*'],
-        tasks: ['imagemin'],
+        files: ['src/images/*.*'],
+        tasks: ['newer:imagemin'],
         options: {
           spawn: false
         }
@@ -94,5 +94,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-ftp-deploy');
-  grunt.registerTask('default', ['uglify','less','imagemin','watch']);
+  grunt.loadNpmTasks('grunt-newer');
+
+  grunt.registerTask('default', ['newer:uglify','newer:less','newer:imagemin','watch']);
 };

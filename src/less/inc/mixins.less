@@ -27,9 +27,18 @@
   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@endColor,@startColor));
   behavior: url(pie/PIE.htc);
 }
+.background-size(@arguments){
+  -webkit-background-size: @arguments;
+  -moz-background-size: @arguments;
+  -o-background-size: @arguments;
+  -ms-background-size: @arguments;
+  background-size: @arguments;
+}
 .border-radius(@radius){
   -webkit-border-radius:    @radius;
   -moz-border-radius:       @radius;
+  -o-border-radius:         @radius;
+  -ms-border-radius:        @radius;
   border-radius:            @radius;
   behavior: url(pie/PIE.htc);
 }
@@ -42,6 +51,13 @@
   -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
   filter: ~"alpha(opacity=@{opperc})";
 }
+.transform-origin(@arguments) {
+  -webkit-transform-origin: @arguments;
+  -moz-transform-origin: @arguments;
+  -o-transform-origin: @arguments;
+  -ms-transform-origin: @arguments;
+  transform-origin: @arguments;
+}
 .transform(@arguments) {
   -webkit-transform: @arguments;
   -moz-transform: @arguments;
@@ -53,10 +69,41 @@
   -webkit-transition: @arguments;
   -moz-transition: @arguments;
   -o-transition: @arguments;
+  -ms-transition: @arguments;
   transition: @arguments;
+}
+.transition-delay(@arguments) {
+  -webkit-transition-delay: @arguments;
+  -ms-transition-delay: @arguments;
+  -o-transition-delay: @arguments;
+  -ms-transition-delay: @arguments;
+  transition-delay: @arguments;
+}
+.animation-delay(@arguments) {
+  -webkit-animation-delay: @arguments;
+  -ms-animation-delay: @arguments;
+  -o-animation-delay: @arguments;
+  -ms-animation-delay: @arguments;
+  animation-delay: @arguments;
+}
+.animation(@arguments) {
+  -webkit-animation: @arguments;
+  -ms-animation: @arguments;
+  -o-animation: @arguments;
+  -ms-animation: @arguments;
+  animation: @arguments;
+}
+.perspective(@arguments) {
+  -webkit-perspective: @arguments;
+  -moz-perspective: @arguments;
+  -o-perspective: @arguments;
+  -ms-perspective: @arguments;
+  perspective: @arguments;
 }
 .columns(@arguments){
   -webkit-column-count: @arguments;
   -moz-column-count: @arguments;
+  -o-column-count: @arguments;
+  -ms-column-count: @arguments;
   column-count: @arguments;
 }

@@ -1,5 +1,5 @@
 {
-  "name": "tab-dovemen_shampoo",
+  "name": "simple-grunt-workflow",
   "version": "0.1.0",
   "devDependencies": {
     "grunt": "~0.4.2",
@@ -9,6 +9,7 @@
     "grunt-contrib-imagemin": "~0.4.0",
     "grunt-contrib-watch": "~0.5.3",
     "grunt-contrib-less": "~0.8.3",
-    "grunt-ftp-deploy": "~0.1.2"
+    "grunt-ftp-deploy": "~0.1.2",
+    "grunt-newer": "^0.7.0"
   }
 }
