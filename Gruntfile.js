@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         src: ["assets/js/libs/*.js"],
-        dest: "assets/js/libs/libs.js"
+        dest: "assets/js/libs.js"
       }
     },
     uglify: {
