@@ -9,10 +9,22 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    concat: {
+      dist: {
+        src: ["assets/js/libs/*.js"],
+        dest: "assets/js/libs/libs.js"
+      }
+    },
     uglify: {
       build: {
         src: 'src/js/functions.js',
         dest: 'assets/js/functions.min.js'
+      }
+    },
+    jshint: {
+      files: ["src/js/functions.js"],
+      options: {
+        jshintrc: ".jshintrc"
       }
     },
     imagemin: {
@@ -56,6 +68,12 @@ module.exports = function(grunt) {
         ]
       }
     },
+    open : {
+        dev : {
+          path: 'http://localhost/simple-grunt-workflow/',
+          app: 'Google Chrome'
+        }
+    },
     watch: {
       options: {
         livereload: true
@@ -89,12 +107,16 @@ module.exports = function(grunt) {
       }
     }
   });
+  grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-ftp-deploy');
+  grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-newer');
 
   grunt.registerTask('default', ['newer:uglify','newer:less','newer:imagemin','watch']);
+  grunt.registerTask("testjs", ["jshint"]);
 };

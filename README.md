@@ -29,6 +29,8 @@ Es el archivo que contiene los nombres de las librerías que utilizaremos para a
 
 Es el archivo base con el cual crearemos las tareas que necesitamos corra **GruntJS** por nosotros y que reside en la raíz del proyecto junto a **package.json**. En este archivo están definidas los plugins que utilizaremos y cómo deben trabajar, en esta ocasión incluyo los siguientes:
 
+- **concat**: concatena y minifica librerías JavaScript
+- **jshint**: busca y sugiere mejoras en tu JavaScript
 - **uglify**: minifica archivos JavaScript
 - **imagemin**: comprime imágenes
 - **less**: compila y minifica archivos .less
@@ -83,6 +85,13 @@ El cual comenzará a procesar las tareas y se quedará en **watch** esperando ca
 Si hay un error en tu sintaxis lo más probable es que **GruntJS** te avise y deje de correr, por lo que debes corregirlo antes de continuar.
 
 ![](http://www.csslab.cl/wp-content/uploads/2014/04/3error.png)
+
+###Test
+
+A través de un nueva tarea de **GruntJS** se prueba el archivo **JavaScript** en búsqueda de errores de sintaxis y mejoras en él:
+
+	$ grunt testjs
+
 
 ###Deploy
 

@@ -2,8 +2,8 @@
 .out(@color:red){outline:1px solid @color;}
 
 // (¯`·.¸¸.·´¯`·.¸¸.-> MIXINS <-.¸¸.·´¯`·.¸¸.·´¯)
-.escondetxt(){
-  text-indent: -9999px;
+.escondetxt(@where:-9999px){
+  text-indent: @where;
   overflow: hidden;
 }
 .zero(){
@@ -12,9 +12,7 @@
 }
 .box-shadow(@arguments){
   -webkit-box-shadow: @arguments;
-  -moz-box-shadow:    @arguments;
-  box-shadow:         @arguments;
-  behavior: url(pie/PIE.htc);
+  box-shadow: @arguments;
 }
 .gradient-vertical(@startColor: #1e5799, @endColor: #7db9e8){
   background: @endColor;
@@ -25,27 +23,26 @@
   background: -ms-linear-gradient(top,  @startColor 0%,@endColor 100%);
   background: linear-gradient(to bottom,  @startColor 0%,@endColor 100%);
   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@endColor,@startColor));
-  behavior: url(pie/PIE.htc);
+}
+.gradient-horizontal(@startColor: #1e5799, @endColor: #7db9e8) {
+  background: @endColor;
+  background: -webkit-gradient(linear, left top, right top, from(@startColor), to(@endColor));
+  background: -webkit-linear-gradient(left, @startColor, @endColor);
+  background: -moz-linear-gradient(left, @startColor, @endColor);
+  background: -ms-linear-gradient(left, @startColor, @endColor);
+  background: -o-linear-gradient(left, @startColor, @endColor);
+  background: linear-gradient(to right, @startColor, @endColor);
+  filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",@endColor,@startColor));
 }
 .background-size(@arguments){
   -webkit-background-size: @arguments;
-  -moz-background-size: @arguments;
-  -o-background-size: @arguments;
-  -ms-background-size: @arguments;
   background-size: @arguments;
 }
 .border-radius(@radius){
-  -webkit-border-radius:    @radius;
-  -moz-border-radius:       @radius;
-  -o-border-radius:         @radius;
-  -ms-border-radius:        @radius;
-  border-radius:            @radius;
-  behavior: url(pie/PIE.htc);
+  -webkit-border-radius: @radius;
+  border-radius: @radius;
 }
-.opacity(@opacity: 0.5) {
-  -moz-opacity: @opacity;
-  -khtml-opacity: @opacity;
-  -webkit-opacity: @opacity;
+.opacity(@opacity:0.5) {
   opacity: @opacity;
   @opperc: @opacity * 100;
   -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
@@ -53,57 +50,36 @@
 }
 .transform-origin(@arguments) {
   -webkit-transform-origin: @arguments;
-  -moz-transform-origin: @arguments;
-  -o-transform-origin: @arguments;
   -ms-transform-origin: @arguments;
   transform-origin: @arguments;
 }
 .transform(@arguments) {
   -webkit-transform: @arguments;
-  -moz-transform: @arguments;
-  -o-transform: @arguments;
   -ms-transform: @arguments;
   transform: @arguments;
 }
-.transition(@arguments) {
-  -webkit-transition: @arguments;
-  -moz-transition: @arguments;
-  -o-transition: @arguments;
-  -ms-transition: @arguments;
+.transition-delay(@time) {
+  -webkit-transition-delay: @time;
+  transition-delay: @time;
+}
+.transition(@arguments){
+  -webkit-transition: @arguments;  
   transition: @arguments;
 }
-.transition-delay(@arguments) {
-  -webkit-transition-delay: @arguments;
-  -ms-transition-delay: @arguments;
-  -o-transition-delay: @arguments;
-  -ms-transition-delay: @arguments;
-  transition-delay: @arguments;
-}
-.animation-delay(@arguments) {
-  -webkit-animation-delay: @arguments;
-  -ms-animation-delay: @arguments;
-  -o-animation-delay: @arguments;
-  -ms-animation-delay: @arguments;
-  animation-delay: @arguments;
+.animation-delay(@time) {
+  -webkit-animation-delay: @time;
+  animation-delay: @time;
 }
 .animation(@arguments) {
   -webkit-animation: @arguments;
-  -ms-animation: @arguments;
-  -o-animation: @arguments;
-  -ms-animation: @arguments;
   animation: @arguments;
 }
 .perspective(@arguments) {
   -webkit-perspective: @arguments;
-  -moz-perspective: @arguments;
-  -o-perspective: @arguments;
-  -ms-perspective: @arguments;
   perspective: @arguments;
 }
 .columns(@arguments){
   -webkit-column-count: @arguments;
   -moz-column-count: @arguments;
-  -o-column-count: @arguments;
-  -ms-column-count: @arguments;
   column-count: @arguments;
 }
