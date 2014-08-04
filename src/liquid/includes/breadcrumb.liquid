@@ -1,0 +1,9 @@
+{% comment %}
+  **  Menú Migas
+  **  Se define como arreglo globalmente en Gruntfile.js
+{% endcomment %}
+<nav class="breadcrumb">
+{% for item in navMain %}
+	<a href="{{ item.url | downcase | replace: ' ','-' | replace: 'á','a' | replace: 'é','e' | replace: 'í','i' | replace: 'ó','o' | replace: 'ú','u' | replace: 'ñ','n' }}" {% if pageTitle == item.titulo %} class="selected"{% endif %}>{{ item.titulo }}</a>{% if forloop.last != true %}&rsaquo;{% endif %}
+{% endfor %}
+</nav>

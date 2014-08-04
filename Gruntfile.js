@@ -9,16 +9,52 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    liquid: {
+      options: {
+        includes: 'src/liquid/includes',
+        // CUSTOM VARIABLES
+        assetsJS: 'assets/js',
+        assetsCSS: 'assets/css',
+        assetsIMG: 'assets/images',
+        siteName: "Site Title",
+        siteDescription: "Site Description, for SEO purposes.",
+        navMain: [
+          {
+            titulo: "Index",
+            url: "index.html",
+          },
+          {
+            titulo: "First Page",
+            url: "first-page.html",
+          }
+        ]
+        // END CUSTOM VARIABLES
+      },
+      pages: {
+        files: [{ 
+          expand: true, 
+          flatten: true, 
+          src: 'src/liquid/*.liquid', 
+          dest: 'dist/', 
+          ext: '.html' 
+        }]
+      },
+    },
     concat: {
       dist: {
-        src: ["assets/js/libs/*.js"],
-        dest: "assets/js/libs.js"
+        src: ["dist/assets/js/libs/*.js"],
+        dest: "dist/assets/js/libs.js"
       }
     },
     uglify: {
-      build: {
-        src: 'src/js/functions.js',
-        dest: 'assets/js/functions.min.js'
+      options: {
+        beautify: true
+      },
+      my_target: {
+        files: {
+          'dist/assets/js/functions.min.js': ['src/js/functions.js'],
+          'dist/assets/js/functions-index.min.js': ['src/js/functions-index.js'],
+        }
       }
     },
     jshint: {
@@ -32,18 +68,18 @@ module.exports = function(grunt) {
         files: [{
             expand: true,
             cwd: 'src/images/',
-            src: ['**/*.{png,jpg,gif}'],
-            dest: 'assets/images/'
+            src: ['*.{png,jpg,gif}'],
+            dest: 'dist/assets/images/'
         }]
       }
     },
     less: {
       dist: {
         options: {
-            compress: true
+            compress: false
         },
         files: {
-            'assets/css/style.min.css': 'src/less/style.less'
+            'dist/assets/css/style.min.css': 'src/less/style.less'
         }
       } 
     },
@@ -54,7 +90,7 @@ module.exports = function(grunt) {
           port: 21,
           authKey: 'key'
         },
-        src: '/Applications/MAMP/htdocs/simple-grunt-workflow/',
+        src: '/Applications/MAMP/htdocs/simple-grunt-workflow/dist/',
         dest: '/public_html/simple-grunt-workflow/',
         exclusions: [
           '/Applications/MAMP/htdocs/simple-grunt-workflow/**/.*',
@@ -70,7 +106,7 @@ module.exports = function(grunt) {
     },
     open : {
         dev : {
-          path: 'http://localhost/simple-grunt-workflow/',
+          path: 'http://localhost/simple-grunt-workflow/dist/',
           app: 'Google Chrome'
         }
     },
@@ -92,8 +128,9 @@ module.exports = function(grunt) {
           spawn: false
         }
       },
-      html: {
-        files: ['*.html'],
+      liquid: {
+        files: ['src/liquid/*.liquid'],
+        tasks: ['newer:liquid'],
         options: {
             livereload: true
         }
@@ -116,7 +153,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ftp-deploy');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-newer');
+  grunt.loadNpmTasks('grunt-liquid');
 
-  grunt.registerTask('default', ['newer:uglify','newer:less','newer:imagemin','watch']);
+  grunt.registerTask('default', ['newer:liquid','newer:uglify','newer:less','newer:imagemin','watch']);
   grunt.registerTask("testjs", ["jshint"]);
 };

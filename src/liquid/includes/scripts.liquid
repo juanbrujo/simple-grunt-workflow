@@ -1,0 +1,12 @@
+{% comment %}  **  JS global  **  {% endcomment %}
+<script src="{{ assetsJS }}/libs/jquery-1.10.2.min.js"></script>
+<!--[if (gte IE 6)&(lte IE 8)]>
+<script src="{{ assetsJS }}/libs/selectivizr.min.js"></script>
+<![endif]-->
+<script src="{{ assetsJS }}/functions.min.js"></script>
+
+{% comment %}  **  JS específico  **  {% endcomment %}
+{% if pageTitle == "Index" %}
+<script src="{{ assetsJS }}/functions-index.min.js"></script>
+{% endif %}
+

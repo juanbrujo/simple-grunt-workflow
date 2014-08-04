@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset=utf-8>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width">
+    
+    <title>{% if pageTitle %}{{ pageTitle }} | {% endif %}{{ siteName }}</title>
+    
+    {% include "meta" %}
+
+    <link rel="shortcut icon" href="{{ assetsIMG }}/favicon.ico" />
+    <link rel="stylesheet" href="{{ assetsCSS }}/style.min.css">
+    <!--[if (lte IE 8)]>
+    <script src="{{ assetsJS }}/libs/html5shiv.min.js"></script>
+    <![endif]-->
+    <script src="{{ assetsJS }}/libs/modernizr.custom.75908.min.js"></script>
+
+</head>
+<body{% if pageTitle %} class="{{pageTitle | downcase | replace: ' ','-' | replace: 'á','a' | replace: 'é','e' | replace: 'í','i' | replace: 'ó','o' | replace: 'ú','u' | replace: 'ñ','n' }}"{% endif %}>
+    <!--[if lt IE 9]><p class="chromeframe">Tu navegador es <em>antiguo!</em> <a href="https://www.google.com/chrome?hl=es">Actualiza tu navegador</a> ó <a href="http://www.google.com/chromeframe/?redirect=true">instala Google Chrome Frame</a>.</p><![endif]-->
+
+	
