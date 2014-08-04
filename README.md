@@ -28,7 +28,7 @@ Es el archivo que contiene los nombres de las librerías que utilizaremos para a
 
 Es el archivo base con el cual crearemos las tareas que necesitamos corra **GruntJS** por nosotros y que reside en la raíz del proyecto junto a **package.json**. En este archivo están definidas los plugins que utilizaremos y cómo deben trabajar, en esta ocasión incluyo los siguientes:
 
-- *liquid*: manejo de plantillas através de [liquid-node](https://github.com/sirlantis/liquid-node) dejándolas como .html (ó el formato que quieras en realidad).
+- **liquid**: manejo de plantillas através de [liquid-node](https://github.com/sirlantis/liquid-node) compilándolas como .html (ó el formato que quieras en realidad).
 - **concat**: concatena y minifica librerías JavaScript
 - **jshint**: busca y sugiere mejoras en tu JavaScript
 - **uglify**: minifica archivos JavaScript
