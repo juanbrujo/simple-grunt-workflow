@@ -9,7 +9,6 @@ Automatización de tareas para proyectos en Front-End | CSSLab.cl
 
 **GruntJS** es la herramienta de automatización de tareas escrita en **JavaScript** que más crece actualmente. Es robusta y está activamente siendo mejorada, y sólo requiere **NodeJS** para funcionar. Su fortaleza está en crear rutinas automatizadas para procesos repetitivos, como por ejemplo: compilar un archivo **LESS/SCSS/HAML/Handlebars/Liquid**, minificar archivos **.css** y **.js**, concatenar librerías **.js**, comprimir imágenes, recargar el browser cada vez que hayan nuevos cambios entre muchos otros que se te puedan ocurrir.
 
-
 En esta ocasión mostraré un sencillo flujo que pueden utilizar para proyectos front-end; es un buen comienzo para quienes no están familiarizados aún con su utilidad y el uso cotidiano del Terminal/Consola.
 
 Primero, debes tener lo fundamental para funcionar:
@@ -29,6 +28,7 @@ Es el archivo que contiene los nombres de las librerías que utilizaremos para a
 
 Es el archivo base con el cual crearemos las tareas que necesitamos corra **GruntJS** por nosotros y que reside en la raíz del proyecto junto a **package.json**. En este archivo están definidas los plugins que utilizaremos y cómo deben trabajar, en esta ocasión incluyo los siguientes:
 
+- *liquid*: manejo de plantillas através de [liquid-node](https://github.com/sirlantis/liquid-node) dejándolas como .html (ó el formato que quieras en realidad).
 - **concat**: concatena y minifica librerías JavaScript
 - **jshint**: busca y sugiere mejoras en tu JavaScript
 - **uglify**: minifica archivos JavaScript
