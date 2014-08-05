@@ -4,7 +4,7 @@
 {% endcomment %}
 
 <nav class="main-menu">
-{% for item in navMain %}
-	<a href="{{ item.url }}" title="{{ item.titulo }} | {{ siteName }}" {% if pageTitle == item.titulo %} class="selected"{% endif %}>{{ item.titulo }}</a>
+{% for pagina in navMain %}
+	<a href="{{ pagina.url }}" title="{{ pagina.titulo }} | {{ siteName }}" {% if pageTitle == pagina.titulo %} class="selected"{% endif %}>{{ pagina.titulo }}</a>
 {% endfor %}
 </nav>

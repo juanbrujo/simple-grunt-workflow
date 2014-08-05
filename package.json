@@ -13,7 +13,7 @@
     "grunt-newer": "^0.7.0",
     "grunt-contrib-concat": "^0.5.0",
     "grunt-open": "^0.2.3",
-    "grunt-liquid": "^2.0.0"
+    "grunt-liquid": "0.0.8"
   },
   "scripts": {
     "test": "grunt testjs --verbose"

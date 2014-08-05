@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include header %}
+  </head>
+  <body{% if pageTitle %} class="{{pageTitle | downcase | replace: ' ','-' | replace: 'á','a' | replace: 'é','e' | replace: 'í','i' | replace: 'ó','o' | replace: 'ú','u' | replace: 'ñ','n' }}"{% endif %}>
+
+    {% block body %}
+
+    {% endblock %}
+    {% include footer %}
+  </body>
+</html>
