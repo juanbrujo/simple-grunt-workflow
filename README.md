@@ -35,34 +35,36 @@ Es el archivo base con el cual crearemos las tareas que necesitamos corra **Grun
 - **imagemin**: comprime imágenes
 - **less**: compila y minifica archivos .less
 - **watch**: corre tareas definidas cada vez que se realizan cambios a ellas, en este caso todas las anteriores.
-- **ftp-deploy**: realiza subida de los archivos que indiques a un servidor definido a través de FTP.
+- **ftp-deploy**: realiza subida de los archivos que indiques a un servidor definido a través del sencillo protocolo FTP.
 
 ###Uso
 
-El directorio base se llama `/proyecto-simple` y contiene todo lo necesario para comenzar a trabajar. Suponiendo que trabajas en un servidor local, la estructura básica de archivos es la siguiente:
+El directorio base contiene todo lo necesario para comenzar a trabajar. Suponiendo que trabajas en un servidor local, la estructura básica de archivos es la siguiente:
 
-	/proyecto-simple/Gruntfile.js
-	/proyecto-simple/package.json
-	/proyecto-simple/ftppass (este archivo cuando necesario debes renombrarlo a .ftppass)
-	/proyecto-simple/index.html
+	/Gruntfile.js
+	/package.json
+	/.ftppass
 	
-El directorio donde trabajarás tus assets se llama `/assets-dev` y contiene:
+El directorio donde trabajarás tus archivos fuente se llama `/src` y contiene:
 
-	/proyecto-simple/assets-dev/js/
-	/proyecto-simple/assets-dev/less/
-	/proyecto-simple/assets-dev/less/inc/
-	/proyecto-simple/assets-dev/images/
+	/src/js/
+	/src/less/
+	/src/less/inc/
+	/src/images/
+	/src/liquid/
+	/src/liquid/includes/
 	
 Los que después de procesados por **GruntJS** residirán en `/assets` y son los que debes llamar desde tus archivos **HTML**:
 
-	/proyecto-simple/assets/js/
-	/proyecto-simple/assets/js/libs/
-	/proyecto-simple/assets/css/
-	/proyecto-simple/assets/images/
+	/dist/assets/js/
+	/dist/assets/js/libs/
+	/dist/assets/css/
+	/dist/assets/images/
+	/dist/*.html
 	
-Para comenzar a trabajar, en Terminal/Consola debes estar en el directorio que estés trabajando:
+Para comenzar a trabajar, en *Terminal/Consola* debes estar en el directorio que estés trabajando:
 
-	$ cd /path/to/proyecto-simple/
+	$ cd /path/to/simple-grunt-workflow/
 
 Para instalar los plugins a utilizarse y que están definidos en **package.json**:
 
@@ -95,7 +97,7 @@ A través de un nueva tarea de **GruntJS** se prueba el archivo **JavaScript** e
 
 ###Deploy
 
-Se adjunta el plugin **ftp-deploy** el que debe utilizarse cuando necesitas mover archivos a tu servidor productivo. Se configura en **Gruntfile.js** la URL, puerto y dónde se lee el u/p de acceso. Éstos se guardan en un archivo **ftppass** el que se adjunta, pero en tu directorio de trabajo debe guardarse como archivo oculto **.ftppass**. Además, está pre-configurado los archivos y directorios que se excluyen, como **Gruntfile.js**, **package.json**, **/assets-dev** y **/node_modules** entre otros. Cuando necesites subir a productivo tus archivos, desactivas el **watch** de **GruntJS** (`⌘+.` ó `ctrl+.`) y envías todos tus archivos al servidor con el siguiente comando:
+Se adjunta el plugin **ftp-deploy** el que debe utilizarse cuando necesitas mover archivos a tu servidor productivo. Se configura en **Gruntfile.js** la URL, puerto y dónde se lee el u/p de acceso. Éstos se guardan en un archivo **.ftppass** el que se adjunta **.ftppass**. Además está pre-configurado los archivos y directorios que se excluyen, como **Gruntfile.js**, **package.json**, **/src** y **/node_modules** entre otros. Cuando necesites subir a productivo tus archivos, desactivas el **watch** de **GruntJS** (`⌘+.` ó `ctrl+.`) y envías todos tus archivos al servidor con el siguiente comando:
 
 	$ grunt ftp-deploy
 

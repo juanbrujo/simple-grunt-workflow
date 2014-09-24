@@ -1,11 +1,11 @@
 /**
-**
-** Basic Grunt workflow for small front-end projects
-** repo: https://github.com/juanbrujo/simple-grunt-workflow
-** article: http://www.csslab.cl/2014/04/07/automatizacion-de-tareas-para-proyectos-en-front-end/
-** @csslab / ©2014
-**
-**/
+ *
+ * Basic Grunt workflow for small front-end projects
+ * repo: https://github.com/juanbrujo/simple-grunt-workflow
+ * article: http://www.csslab.cl/2014/04/07/automatizacion-de-tareas-para-proyectos-en-front-end/
+ * @csslab / ©2014
+ *
+ */
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
