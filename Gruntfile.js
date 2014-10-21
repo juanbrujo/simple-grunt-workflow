@@ -11,14 +11,14 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       dist: {
-        src: ["assets/js/libs/*.js"],
-        dest: "assets/js/libs.js"
+        src: ["src/js/libs/*.js"],
+        dest: "dist/assets/js/libs.js"
       }
     },
     uglify: {
       build: {
         src: 'src/js/functions.js',
-        dest: 'assets/js/functions.min.js'
+        dest: 'dist/assets/js/functions.min.js'
       }
     },
     jshint: {
@@ -27,13 +27,13 @@ module.exports = function(grunt) {
         jshintrc: ".jshintrc"
       }
     },
-    imagemin: {
+    image: {
       dynamic: {
         files: [{
             expand: true,
             cwd: 'src/images/',
-            src: ['**/*.{png,jpg,gif}'],
-            dest: 'assets/images/'
+            src: ['**/*.{png,jpg,gif,svg}'],
+            dest: 'dist/assets/images/'
         }]
       }
     },
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
             compress: true
         },
         files: {
-            'assets/css/style.min.css': 'src/less/style.less'
+            'dist/assets/css/style.min.css': 'src/less/style.less'
         }
       } 
     },
@@ -70,7 +70,7 @@ module.exports = function(grunt) {
     },
     open : {
         dev : {
-          path: 'http://localhost/simple-grunt-workflow/',
+          path: 'http://localhost/simple-grunt-workflow/dist/',
           app: 'Google Chrome'
         }
     },
@@ -93,14 +93,14 @@ module.exports = function(grunt) {
         }
       },
       html: {
-        files: ['*.html'],
+        files: ['dist/*.html'],
         options: {
             livereload: true
         }
       },
       another: {
         files: ['src/images/*.*'],
-        tasks: ['newer:imagemin'],
+        tasks: ['newer:image'],
         options: {
           spawn: false
         }
@@ -109,7 +109,7 @@ module.exports = function(grunt) {
   });
   grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-image');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -117,6 +117,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-newer');
 
-  grunt.registerTask('default', ['newer:uglify','newer:less','newer:imagemin','watch']);
+  grunt.registerTask('default', ['newer:uglify','newer:less','newer:image','watch']);
   grunt.registerTask("testjs", ["jshint"]);
 };
