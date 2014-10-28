@@ -9,7 +9,6 @@ Automatización de tareas para proyectos en Front-End | CSSLab.cl
 
 **GruntJS** es la herramienta de automatización de tareas escrita en **JavaScript** que más crece actualmente. Es robusta y está activamente siendo mejorada, y sólo requiere **NodeJS** para funcionar. Su fortaleza está en crear rutinas automatizadas para procesos repetitivos, como por ejemplo: compilar un archivo **LESS/SCSS/HAML/Handlebars/Liquid**, minificar archivos **.css** y **.js**, concatenar librerías **.js**, comprimir imágenes, recargar el browser cada vez que hayan nuevos cambios entre muchos otros que se te puedan ocurrir.
 
-
 En esta ocasión mostraré un sencillo flujo que pueden utilizar para proyectos front-end; es un buen comienzo para quienes no están familiarizados aún con su utilidad y el uso cotidiano del Terminal/Consola.
 
 Primero, debes tener lo fundamental para funcionar:
@@ -19,11 +18,19 @@ Primero, debes tener lo fundamental para funcionar:
 - Grunt command line interface (CLI): se instala através del comando de terminal:
 
 	`$ sudo npm install -g grunt-cli`
+	
+- [Bower](http://bower.io/):
+	
+	`$ sudo npm install -g bower`
 
 
 ###package.json
 
-Es el archivo que contiene los nombres de las librerías que utilizaremos para automatizar nuestras tareas recurrentes y que reside en la raíz del proyecto. Aquí están el nombre y la versión de cada plugin que necesitaremos, de una larga lista de plugins existentes.
+Es el archivo que contiene los nombres de las librerías **Node** que utilizaremos para automatizar nuestras tareas recurrentes y que reside en la raíz del proyecto. Aquí están el nombre y la versión de cada plugin que necesitaremos, de una larga lista de plugins existentes.
+
+###bower.json
+
+Archivo json que contiene las librerías **JavaScript** utilizadas para este proyecto. A través de ella se realiza el traspaso desde cada repositorio y se descarga las últimas versiones disponibles a `bower_components` y que posteriormente serán procesadas.
 
 ###Gruntfile.js
 
@@ -34,35 +41,36 @@ Es el archivo base con el cual crearemos las tareas que necesitamos corra **Grun
 - **uglify**: minifica archivos JavaScript
 - **imagemin**: comprime imágenes
 - **less**: compila y minifica archivos .less
+- **bowercopy**: copia las librerías JS en /src/js/libs para su uso
 - **watch**: corre tareas definidas cada vez que se realizan cambios a ellas, en este caso todas las anteriores.
 - **ftp-deploy**: realiza subida de los archivos que indiques a un servidor definido a través de FTP.
 
 ###Uso
 
-El directorio base se llama `/proyecto-simple` y contiene todo lo necesario para comenzar a trabajar. Suponiendo que trabajas en un servidor local, la estructura básica de archivos es la siguiente:
+El directorio base se llama `/simple-grunt-workflow` y contiene todo lo necesario para comenzar a trabajar. Suponiendo que trabajas en un servidor local, la estructura básica de archivos es la siguiente:
 
-	/proyecto-simple/Gruntfile.js
-	/proyecto-simple/package.json
-	/proyecto-simple/ftppass (este archivo cuando necesario debes renombrarlo a .ftppass)
-	/proyecto-simple/index.html
+	/simple-grunt-workflow/Gruntfile.js
+	/simple-grunt-workflow/package.json
+	/simple-grunt-workflow/ftppass (este archivo cuando necesario debes renombrarlo a .ftppass)
+	/simple-grunt-workflow/index.html
 	
 El directorio donde trabajarás tus assets se llama `/assets-dev` y contiene:
 
-	/proyecto-simple/assets-dev/js/
-	/proyecto-simple/assets-dev/less/
-	/proyecto-simple/assets-dev/less/inc/
-	/proyecto-simple/assets-dev/images/
+	/simple-grunt-workflow/assets-dev/js/
+	/simple-grunt-workflow/assets-dev/less/
+	/simple-grunt-workflow/assets-dev/less/inc/
+	/simple-grunt-workflow/assets-dev/images/
 	
 Los que después de procesados por **GruntJS** residirán en `/assets` y son los que debes llamar desde tus archivos **HTML**:
 
-	/proyecto-simple/assets/js/
-	/proyecto-simple/assets/js/libs/
-	/proyecto-simple/assets/css/
-	/proyecto-simple/assets/images/
+	/simple-grunt-workflow/assets/js/
+	/simple-grunt-workflow/assets/js/libs/
+	/simple-grunt-workflow/assets/css/
+	/simple-grunt-workflow/assets/images/
 	
 Para comenzar a trabajar, en Terminal/Consola debes estar en el directorio que estés trabajando:
 
-	$ cd /path/to/proyecto-simple/
+	$ cd /path/to/simple-grunt-workflow/
 
 Para instalar los plugins a utilizarse y que están definidos en **package.json**:
 
@@ -72,13 +80,17 @@ Para instalar los plugins a utilizarse y que están definidos en **package.json*
 
 Con esto se llamarán a todos los repositorios e instalará los paquetes necesarios para hacer las tareas que tenemos asignadas. Esto puede tomar unos minutos y creará un directorio `/node_modules` en la raíz de tu proyecto. Este directorio sólo le es útil a **GruntJS**, no debemos utilizarlo en ambiente productivo.
 
+Luego es hora de descargar las librerías **JavaScript** base y sus dependencias a través de **Bower**:
+
+	$ sudo bower install
+
 Antes de correr **GruntJS**, abre **Gruntfile.js** y revisa los path que concuerden con los que estés trabajando, principamente los relacionados con **ftp-deploy** (si lo vas a utilizar). Si todo concuerda, acciona el comando:
 
 	$ grunt
 	
 ![](http://www.csslab.cl/wp-content/uploads/2014/04/2watch.png)
 
-El cual comenzará a procesar las tareas y se quedará en **watch** esperando cambios o actualizaciones en los archivos. En este momento debes llamar el directorio de trabajo en tu browser (a través de tu servidor web local) y activar **LiveReload**. Cuando el ícono cambie es porque está sincronizado con **GruntJS** y a cada cambio en archivos **html/less/js/images** en tu proyecto, **watch** hará que se actualicen los archivos y **LiveReload** recargará el browser por tí.
+El cual comenzará a procesar las tareas ya definidas y se quedará en **watch** esperando cambios o actualizaciones en los archivos. En este momento debes llamar el directorio de trabajo en tu browser (a través de tu servidor web local) y activar **LiveReload**. Cuando el ícono cambie es porque está sincronizado con **GruntJS** y a cada cambio en archivos **html/less/js/images** en tu proyecto, **watch** hará que se actualicen los archivos y **LiveReload** recargará el browser por tí.
 
 ![](http://www.csslab.cl/wp-content/uploads/2014/04/Screen-Shot-2014-04-03-at-5.12.04-PM.png)![](http://www.csslab.cl/wp-content/uploads/2014/04/Screen-Shot-2014-04-03-at-5.13.24-PM.png)
 

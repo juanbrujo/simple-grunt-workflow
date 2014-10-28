@@ -9,16 +9,38 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    bowercopy: {
+      libs: {
+        options: {
+          destPrefix: 'src/js/libs'
+        },
+        files: {
+          'jquery.js': 'jquery/dist/jquery.js',
+          'html5shiv.js': 'html5shiv/dist/html5shiv.js',
+          'modernizr.js': 'modernizr/modernizr.js',
+          'detectizr.js': 'detectizr/dist/detectizr.js',
+          'selectivizr.js': 'selectivizr/selectivizr.js'
+        },
+      },
+    },
     concat: {
-      dist: {
-        src: ["src/js/libs/*.js"],
-        dest: "dist/assets/js/libs.js"
-      }
+      basic_and_extras: {
+        files: {
+          'dist/assets/js/libs/modernizr-detectizr.min.js': ['dist/assets/js/libs/modernizr.js','dist/assets/js/libs/detectizr.js']
+        },
+      },
     },
     uglify: {
-      build: {
-        src: 'src/js/functions.js',
-        dest: 'dist/assets/js/functions.min.js'
+      options: {
+        mangle: true
+      },
+      libs: {
+        files: [{
+          expand: true,
+          cwd: 'src/js',
+          src: '**/*.js',
+          dest: 'dist/assets/js'
+        }]
       }
     },
     jshint: {
@@ -108,6 +130,7 @@ module.exports = function(grunt) {
     }
   });
   grunt.loadNpmTasks("grunt-contrib-concat");
+  grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-image');
   grunt.loadNpmTasks('grunt-contrib-less');
@@ -116,7 +139,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ftp-deploy');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-newer');
-
-  grunt.registerTask('default', ['newer:uglify','newer:less','newer:image','watch']);
+  grunt.registerTask('default', ['bowercopy','concat','newer:uglify','newer:less','newer:image','watch']);
   grunt.registerTask("testjs", ["jshint"]);
 };
