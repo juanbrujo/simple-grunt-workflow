@@ -26,7 +26,7 @@ module.exports = function(grunt) {
     concat: {
       basic_and_extras: {
         files: {
-          'dist/assets/js/libs/modernizr-detectizr.min.js': ['dist/assets/js/libs/modernizr.js','dist/assets/js/libs/detectizr.js']
+          'dist/assets/js/libs/modernizr-detectizr.js': ['dist/assets/js/libs/modernizr.js','dist/assets/js/libs/detectizr.js']
         },
       },
     },
