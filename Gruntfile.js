@@ -54,9 +54,18 @@ module.exports = function(grunt) {
         files: [{
             expand: true,
             cwd: 'src/images/',
-            src: ['**/*.{png,jpg,gif,svg}'],
+            src: ['*.{png,jpg,gif,svg}'],
             dest: 'dist/assets/images/'
         }]
+      }
+    },
+    sprite:{
+      all: {
+        src: 'src/images/sprites/*.png',
+        destImg: 'src/images/sprites.png',
+        destCSS: 'src/less/inc/sprites.less',
+        algorithm: 'binary-tree',
+        padding: 2
       }
     },
     less: {
@@ -120,6 +129,10 @@ module.exports = function(grunt) {
             livereload: true
         }
       },
+      sprites: {
+        files: ['src/images/sprites/*.*'],
+        tasks: ['sprite']
+      },
       another: {
         files: ['src/images/*.*'],
         tasks: ['newer:image'],
@@ -139,6 +152,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ftp-deploy');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-newer');
-  grunt.registerTask('default', ['bowercopy','concat','newer:uglify','newer:less','newer:image','watch']);
+  grunt.loadNpmTasks('grunt-spritesmith');
+  grunt.registerTask('default', ['bowercopy','concat','newer:uglify','sprite','newer:less','newer:image','watch']);
   grunt.registerTask("testjs", ["jshint"]);
 };
