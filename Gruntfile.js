@@ -19,8 +19,18 @@ module.exports = function(grunt) {
           'html5shiv.js': 'html5shiv/dist/html5shiv.js',
           'modernizr.js': 'modernizr/modernizr.js',
           'detectizr.js': 'detectizr/dist/detectizr.js',
-          'selectivizr.js': 'selectivizr/selectivizr.js'
+          'selectivizr.js': 'selectivizr/selectivizr.js',
         },
+      },
+      folders: {
+        options: {
+          destPrefix: 'dist/assets/css/pie'
+        },
+        files: {
+          'PIE.js': 'css3pie/PIE.js',
+          'PIE.htc': 'css3pie/PIE.htc',
+          'PIE.php': 'css3pie/PIE.php'
+        }
       },
     },
     concat: {
