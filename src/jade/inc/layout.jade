@@ -1,0 +1,21 @@
+doctype html 
+html( lang="es" )
+	block vars
+	head
+		meta( name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" )
+		meta( charset="utf-8" )
+		block wHead
+		if !defaultConfig
+			link(rel="stylesheet", type="text/css", href="assets/css/main.css")
+		else 
+			link(rel="stylesheet", type="text/css", href="#{defaultConfig.rootCSS}main.css")
+	body 
+		block wBody
+		block wScripts
+			if !defaultConfig
+				script(type="text/javascript", src="assets/js/libs/jquery.js")
+				script(type="text/javascript", src="assets/js/libs/respond.js")				
+			else
+				script(type="text/javascript", src="#{defaultConfig.rootJS}libs/jquery.js")
+				script(type="text/javascript", src="#{defaultConfig.rootJS}libs/respond.js")
+

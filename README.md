@@ -1,15 +1,11 @@
-Automatización de tareas para proyectos en Front-End | CSSLab.cl
-=====================
+#Automatización de tareas para proyectos en Front-End | CSSLab.cl
 
-`Basic and simple GruntJS workflow for front-end projects`
+#####Adaptado para Proyectos I2B.cl
+
 
 ![Automatización de tareas para proyectos en Front-End](http://www.csslab.cl/wp-content/uploads/2014/04/grunt.jpg)
 
-**Artículo:** [Automatización de tareas para proyectos en Front-End | CSSLab.cl](http://www.csslab.cl/2014/04/07/automatizacion-de-tareas-para-proyectos-en-front-end/)
-
-**GruntJS** es la herramienta de automatización de tareas escrita en **JavaScript** que más crece actualmente. Es robusta y está activamente siendo mejorada, y sólo requiere **NodeJS** para funcionar. Su fortaleza está en crear rutinas automatizadas para procesos repetitivos, como por ejemplo: compilar un archivo **LESS/SCSS/HAML/Handlebars/Liquid**, minificar archivos **.css** y **.js**, concatenar librerías **.js**, crear *sprites* y comprimir imágenes, recargar el browser cada vez que hayan nuevos cambios entre muchos otros que se te puedan ocurrir.
-
-Este es un sencillo flujo que pueden utilizar para proyectos front-end; es un buen comienzo para quienes no están familiarizados aún con su utilidad y el uso cotidiano del Terminal/Consola.
+Este es un sencillo flujo que pueden utilizar para proyectos front-end; es un buen comienzo para quienes no están familiarizados aún con su utilidad y el uso cotidiano del *Terminal/Consola*.
 
 Primero, debes tener lo fundamental para funcionar:
 
@@ -41,7 +37,9 @@ Es el archivo base con el cual crearemos las tareas que necesitamos corra **Grun
 - **uglify**: minifica archivos JavaScript
 - **spritesmith**: crea una imagen y una hoja de estilos sprite a partir de varios íconos
 - **imagemin**: comprime imágenes
-- **less**: compila y minifica archivos .less
+- **stylus**: compila y minifica archivos .styl
+- **jade**: compila y minifica archivos .jade
+- **coffee**: compila y minifica archivos .cofee
 - **bowercopy**: copia las librerías JS en /src/js/libs para su uso
 - **watch**: corre tareas definidas cada vez que se realizan cambios a ellas, en este caso todas las anteriores.
 - **ftp-deploy**: realiza subida de los archivos que indiques a un servidor definido a través de FTP.
@@ -58,8 +56,11 @@ El directorio base se llama `/simple-grunt-workflow` y contiene todo lo necesari
 El directorio donde trabajarás tus assets se llama `/src ` y contiene:
 
 	/simple-grunt-workflow/src/js/
-	/simple-grunt-workflow/src/less/
-	/simple-grunt-workflow/src/less/inc/
+	/simple-grunt-workflow/src/js/libs/
+	/simple-grunt-workflow/src/stylus/
+	/simple-grunt-workflow/src/stylus/inc/
+	/simple-grunt-workflow/src/jade/
+	/simple-grunt-workflow/src/jade/inc/
 	/simple-grunt-workflow/src/images/
 	/simple-grunt-workflow/src/images/sprites/
 	
