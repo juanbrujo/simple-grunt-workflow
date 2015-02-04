@@ -20,6 +20,7 @@ module.exports = function(grunt) {
           'modernizr.js': 'modernizr/modernizr.js',
           'detectizr.js': 'detectizr/dist/detectizr.js',
           'selectivizr.js': 'selectivizr/selectivizr.js',
+          'respond.js': 'respond/dest/respond.src.js'
         },
       },
       folders: {
