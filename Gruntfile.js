@@ -164,6 +164,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-newer');
   grunt.loadNpmTasks('grunt-spritesmith');
-  grunt.registerTask('default', ['bowercopy','concat','newer:uglify','sprite','newer:less','newer:image','watch']);
+  grunt.registerTask('default', ['bowercopy','newer:uglify','concat','sprite','newer:less','newer:image','watch']);
   grunt.registerTask("testjs", ["jshint"]);
 };

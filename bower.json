@@ -14,11 +14,11 @@
     "tests"
   ],
   "devDependencies": {
-    "detectizr": "~2.0.0",
-    "modernizr": "~2.8.3",
-    "html5shiv": "~3.7.2",
-    "jquery": "1.11.1",
-    "selectivizr": "~1.0.2",
-    "css3pie": "*"
+    "detectizr": "latest",
+    "modernizr": "latest",
+    "html5shiv": "latest",
+    "jquery": "1.11.2",
+    "selectivizr": "latest",
+    "css3pie": "latest"
   }
 }
