@@ -33,6 +33,14 @@ module.exports = function(grunt) {
           'PIE.php': 'css3pie/PIE.php'
         }
       },
+      css: {
+        options: {
+          destPrefix: 'src/less/inc'
+        },
+        files: {
+          'yui3-cssreset.less': 'yui3/build/cssreset/cssreset.css'
+        }
+      }
     },
     concat: {
       basic_and_extras: {
