@@ -40,7 +40,7 @@ Es el archivo base con el cual crearemos las tareas que necesitamos corra **Grun
 - **jshint**: busca y sugiere mejoras en tu JavaScript
 - **uglify**: minifica archivos JavaScript
 - **spritesmith**: crea una imagen y una hoja de estilos sprite a partir de varios íconos
-- **imagemin**: comprime imágenes
+- **image**: comprime imágenes
 - **less**: compila y minifica archivos .less
 - **bowercopy**: copia las librerías JS en /src/js/libs para su uso
 - **watch**: corre tareas definidas cada vez que se realizan cambios a ellas, en este caso todas las anteriores.
