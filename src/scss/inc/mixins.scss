@@ -1,0 +1,102 @@
+// JUST FOR DEBUGGING
+@mixin out($color:red)
+{outline:1px solid $color;}
+
+//  MIXINS 
+@mixin escondetxt($where:-9999px)
+{
+  text-indent: $where;
+  overflow: hidden;
+}
+@mixin zero()
+{
+  margin: 0;
+  padding: 0;
+}
+@mixin box-shadow($arguments)
+{
+  -webkit-box-shadow: $arguments;
+  box-shadow: $arguments;
+}
+@mixin gradient-vertical($startColor: #1e5799, $endColor: #7db9e8)
+{
+  background: $endColor;
+  background: -moz-linear-gradient(top,  $startColor 0%, $endColor 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$startColor), color-stop(100%,$endColor));
+  background: -webkit-linear-gradient(top,  $startColor 0%,$endColor 100%);
+  background: -o-linear-gradient(top,  $startColor 0%,$endColor 100%);
+  background: -ms-linear-gradient(top,  $startColor 0%,$endColor 100%);
+  background: linear-gradient(to bottom,  $startColor 0%,$endColor 100%);
+  //filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",$endColor,$startColor));
+}
+@mixin gradient-horizontal($startColor: #1e5799, $endColor: #7db9e8)
+{
+  background: $endColor;
+  background: -webkit-gradient(linear, left top, right top, from($startColor), to($endColor));
+  background: -webkit-linear-gradient(left, $startColor, $endColor);
+  background: -moz-linear-gradient(left, $startColor, $endColor);
+  background: -ms-linear-gradient(left, $startColor, $endColor);
+  background: -o-linear-gradient(left, $startColor, $endColor);
+  background: linear-gradient(to right, $startColor, $endColor);
+  //filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",$endColor,$startColor));
+}
+@mixin background-size($arguments)
+{
+  -webkit-background-size: $arguments;
+  background-size: $arguments;
+}
+@mixin border-radius($radius)
+{
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+@mixin opacity($opacity:0.5)
+{
+  opacity: $opacity;
+  $opperc: $opacity * 100;
+  -ms-filter: #{"progid:DXImageTransform.Microsoft.Alpha(opacity=${opperc})"};
+  filter: #{"alpha(opacity=${opperc})"};
+}
+@mixin transform-origin($arguments)
+{
+  -webkit-transform-origin: $arguments;
+  -ms-transform-origin: $arguments;
+  transform-origin: $arguments;
+}
+@mixin transform($arguments)
+{
+  -webkit-transform: $arguments;
+  -ms-transform: $arguments;
+  transform: $arguments;
+}
+@mixin transition-delay($time)
+{
+  -webkit-transition-delay: $time;
+  transition-delay: $time;
+}
+@mixin transition($arguments)
+{
+  -webkit-transition: $arguments;  
+  transition: $arguments;
+}
+@mixin animation-delay($time)
+{
+  -webkit-animation-delay: $time;
+  animation-delay: $time;
+}
+@mixin animation($arguments)
+{
+  -webkit-animation: $arguments;
+  animation: $arguments;
+}
+@mixin perspective($arguments)
+{
+  -webkit-perspective: $arguments;
+  perspective: $arguments;
+}
+@mixin columns($arguments)
+{
+  -webkit-column-count: $arguments;
+  -moz-column-count: $arguments;
+  column-count: $arguments;
+}

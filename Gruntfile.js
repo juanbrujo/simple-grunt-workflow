@@ -17,7 +17,7 @@ module.exports = function(grunt) {
           destPrefix: 'src/js/libs'
         },
         files: {
-          'jquery.js': 'jquery/jquery.min.js',
+          'jquery.js': 'jquery/dist/jquery.min.js',
           'html5shiv.js': 'html5shiv/dist/html5shiv.js',
           'modernizr.js': 'modernizr/modernizr.js',
           'detectizr.js': 'detectizr/dist/detectizr.js',
@@ -35,6 +35,14 @@ module.exports = function(grunt) {
           'PIE.php': 'css3pie/PIE.php'
         }
       },
+      css: {
+        options: {
+          destPrefix: 'src/scss/inc'
+        },
+        files: {
+          'yui3-cssreset.scss': 'yui3/build/cssreset/cssreset-min.css'
+        }
+      }
     },
     concat: {
       basic_and_extras: {
@@ -62,7 +70,7 @@ module.exports = function(grunt) {
         jshintrc: ".jshintrc"
       }
     },
-    image: {
+    imagemin: {
       dynamic: {
         files: [{
             expand: true,
@@ -75,8 +83,8 @@ module.exports = function(grunt) {
     sprite:{
       all: {
         src: 'src/images/sprites/*.png',
-        destImg: 'src/images/sprites.png',
-        destCSS: 'src/stylus/inc/sprites.styl',
+        dest: 'dist/assets/images/sprites.png',
+        destCss: 'src/scss/inc/sprites.scss',
         algorithm: 'binary-tree',
         padding: 2
       }
@@ -84,7 +92,6 @@ module.exports = function(grunt) {
     jade: {
       compile: {
         options: {
-          client: false,
           pretty: true
         },
         files: [{
@@ -96,28 +103,18 @@ module.exports = function(grunt) {
         }]
       }
     },
-    stylus: {
+    sass: {
       build: {
         options: {
-          linenos: true,
-          compress: false
+          style: 'expanded'
         },
         files: [{
           expand: true,
-          cwd: 'src/stylus',
-          src: [ '*.styl' ],
+          cwd: 'src/scss',
+          src: [ '*.scss' ],
           dest: 'dist/assets/css',
           ext: '.css'
         }]
-      }
-    },
-    coffee: {
-      build: {
-        expand: true,
-        cwd: 'src/js',
-        src: [ '*.coffee' ],
-        dest: 'dist/assets/js',
-        ext: '.js'
       }
     },
     'ftp-deploy': {
@@ -141,12 +138,6 @@ module.exports = function(grunt) {
         ]
       }
     },
-    open : {
-        dev : {
-          path: 'http://localhost/simple-grunt-workflow/dist/',
-          app: 'Google Chrome'
-        }
-    },
     watch: {
       options: {
         livereload: true
@@ -162,13 +153,9 @@ module.exports = function(grunt) {
         files: 'src/jade/*.jade',
         tasks: ['newer:jade']
       },
-      coffee: {
-        files: 'src/js/*.coffee',
-        tasks: ['newer:coffee']
-      },
       css: {
-        files: ['src/stylus/*.styl'],
-        tasks: ['newer:stylus'],
+        files: ['src/scss/*.scss'],
+        tasks: ['newer:sass'],
         options: {
           spawn: false
         }
@@ -179,7 +166,7 @@ module.exports = function(grunt) {
       },
       another: {
         files: ['src/images/*.*'],
-        tasks: ['newer:image'],
+        tasks: ['newer:imagemin'],
         options: {
           spawn: false
         }
@@ -189,16 +176,16 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-coffee');
-  grunt.loadNpmTasks('grunt-image');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-jade');
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-ftp-deploy');
-  grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-newer');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-spritesmith');
-  grunt.registerTask('default', ['bowercopy','concat','newer:uglify','sprite','newer:jade','newer:image','newer:coffee','watch']);
+  grunt.loadNpmTasks('grunt-compile-handlebars');
+
+  grunt.registerTask('default', ['bowercopy','concat','newer:uglify','sprite','newer:jade','newer:imagemin','newer:sass','watch']);
   grunt.registerTask("testjs", ["jshint"]);
 };

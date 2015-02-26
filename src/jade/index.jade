@@ -1,0 +1,26 @@
+include inc/mixins
+
+doctype html(lang='es')
+head
+	meta(charset='utf-8')
+	meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+	meta(name='viewport', content='width=device-width')
+	title title
+	link(rel='stylesheet', href='assets/css/style.css')
+	<!--[if lt IE 8]>
+	script(src='assets/js/libs/html5shiv.js')
+	<![endif]-->
+	script(src='assets/js/libs/modernizr-detectizr.js')
+
+body
+	h1 Simple Grunt Workflow | I2B version
+	p repo: -
+	p article: -
+
+	//- JavaScript block
+	+loadJQuery('1.11.2')
+	<!--[if lt IE 8]>
+	script(src='assets/js/libs/respond.js')
+	script(src='assets/js/libs/selectivizr.js')
+	<![endif]-->
+	script(src='assets/js/functions.js')
