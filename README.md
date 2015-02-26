@@ -1,13 +1,9 @@
-#Automatización de tareas para proyectos en Front-End | CSSLab.cl
+Automatización de tareas para proyectos en Front-End
+===
 
 #####Adaptado para Proyectos I2B.cl
 
-
-![Automatización de tareas para proyectos en Front-End](http://www.csslab.cl/wp-content/uploads/2014/04/grunt.jpg)
-
-Este es un sencillo flujo que pueden utilizar para proyectos front-end; es un buen comienzo para quienes no están familiarizados aún con su utilidad y el uso cotidiano del *Terminal/Consola*.
-
-Primero, debes tener lo fundamental para funcionar:
+Este es un sencillo flujo que pueden utilizar para proyectos front-end. Debes tener lo fundamental para funcionar:
 
 - [NodeJS](http://nodejs.org/download/)
 - [LiveReload](http://feedback.livereload.com/knowledgebase/articles/86242-how-do-i-install-and-use-the-browser-extensions)
@@ -19,6 +15,11 @@ Primero, debes tener lo fundamental para funcionar:
 	
 	`$ sudo npm install -g bower`
 
+- [Ruby](https://www.ruby-lang.org/en/documentation/installation/)
+
+- [Sass](http://sass-lang.com/install)
+
+	`$ sudo gem install sass`
 
 ###package.json
 
@@ -37,9 +38,9 @@ Es el archivo base con el cual crearemos las tareas que necesitamos corra **Grun
 - **uglify**: minifica archivos JavaScript
 - **spritesmith**: crea una imagen y una hoja de estilos sprite a partir de varios íconos
 - **imagemin**: comprime imágenes
-- **stylus**: compila y minifica archivos .styl
+- **sass**: compila y minifica archivos .scss
 - **jade**: compila y minifica archivos .jade
-- **coffee**: compila y minifica archivos .cofee
+- **handlebars**: compila archivos .handlebars utilizando este template system
 - **bowercopy**: copia las librerías JS en /src/js/libs para su uso
 - **watch**: corre tareas definidas cada vez que se realizan cambios a ellas, en este caso todas las anteriores.
 - **ftp-deploy**: realiza subida de los archivos que indiques a un servidor definido a través de FTP.
@@ -57,8 +58,8 @@ El directorio donde trabajarás tus assets se llama `/src ` y contiene:
 
 	/simple-grunt-workflow/src/js/
 	/simple-grunt-workflow/src/js/libs/
-	/simple-grunt-workflow/src/stylus/
-	/simple-grunt-workflow/src/stylus/inc/
+	/simple-grunt-workflow/src/sass/
+	/simple-grunt-workflow/src/sass/inc/
 	/simple-grunt-workflow/src/jade/
 	/simple-grunt-workflow/src/jade/inc/
 	/simple-grunt-workflow/src/images/
@@ -93,7 +94,7 @@ Antes de correr **GruntJS**, abre **Gruntfile.js** y revisa los path que concuer
 	
 ![](http://www.csslab.cl/wp-content/uploads/2014/04/2watch.png)
 
-El cual comenzará a procesar las tareas ya definidas y se quedará en **watch** esperando cambios o actualizaciones en los archivos. En este momento debes llamar el directorio de trabajo en tu browser (a través de tu servidor web local) y activar **LiveReload**. Cuando el ícono cambie es porque está sincronizado con **GruntJS** y a cada cambio en archivos **html/less/js/images** en tu proyecto, **watch** hará que se actualicen los archivos y **LiveReload** recargará el browser por tí.
+El cual comenzará a procesar las tareas ya definidas y se quedará en **watch** esperando cambios o actualizaciones en los archivos. En este momento debes llamar el directorio de trabajo en tu browser (a través de tu servidor web local) y activar **LiveReload**. Cuando el ícono cambie es porque está sincronizado con **GruntJS** y a cada cambio en archivos **html/sass/js/images** en tu proyecto, **watch** hará que se actualicen los archivos y **LiveReload** recargará el browser por tí.
 
 ![](http://www.csslab.cl/wp-content/uploads/2014/04/Screen-Shot-2014-04-03-at-5.12.04-PM.png)![](http://www.csslab.cl/wp-content/uploads/2014/04/Screen-Shot-2014-04-03-at-5.13.24-PM.png)
 
@@ -110,7 +111,7 @@ A través de un nueva tarea de **GruntJS** se prueba el archivo **JavaScript** e
 
 ###Deploy
 
-Se adjunta el plugin **ftp-deploy** el que debe utilizarse cuando necesitas mover archivos a tu servidor productivo. Se configura en **Gruntfile.js** la URL, puerto y dónde se lee el u/p de acceso. Éstos se guardan en un archivo **ftppass** el que se adjunta, pero en tu directorio de trabajo debe guardarse como archivo oculto **.ftppass**. Además, está pre-configurado los archivos y directorios que se excluyen, como **Gruntfile.js**, **package.json**, **/assets-dev** y **/node_modules** entre otros. Cuando necesites subir a productivo tus archivos, desactivas el **watch** de **GruntJS** (`⌘+.` ó `ctrl+.`) y envías todos tus archivos al servidor con el siguiente comando:
+Se adjunta el plugin **ftp-deploy** el que debe utilizarse cuando necesitas mover archivos a tu servidor de pruebas a través del protocolo FTP. Se configura en **Gruntfile.js** la URL, puerto y dónde se lee el u/p de acceso. Éstos se guardan en un archivo **ftppass** el que se adjunta, pero en tu directorio de trabajo debe guardarse como archivo oculto **.ftppass**. Además, está pre-configurado los archivos y directorios que se excluyen, como **Gruntfile.js**, **package.json**, **/assets-dev** y **/node_modules** entre otros. Cuando necesites subir a productivo tus archivos, desactivas el **watch** de **GruntJS** (`⌘+.` ó `ctrl+.`) y envías todos tus archivos al servidor con el siguiente comando:
 
 	$ grunt ftp-deploy
 

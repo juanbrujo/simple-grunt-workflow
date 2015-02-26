@@ -134,7 +134,8 @@ module.exports = function(grunt) {
           '/Applications/MAMP/htdocs/simple-grunt-workflow/node_modules',
           '/Applications/MAMP/htdocs/simple-grunt-workflow/*.json',
           '/Applications/MAMP/htdocs/simple-grunt-workflow/Gruntfile.js',
-          '/Applications/MAMP/htdocs/simple-grunt-workflow/src'
+          '/Applications/MAMP/htdocs/simple-grunt-workflow/src',
+          '/Applications/MAMP/htdocs/simple-grunt-workflow/.sass-cache'
         ]
       }
     },
