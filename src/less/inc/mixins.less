@@ -1,7 +1,10 @@
-// ¸,ø¤º°`°º¤ø,¸¸,ø¤º° JUST FOR DEBUGGING
+// JUST FOR DEBUGGING
 .out(@color:red){outline:1px solid @color;}
 
-// (¯`·.¸¸.·´¯`·.¸¸.-> MIXINS <-.¸¸.·´¯`·.¸¸.·´¯)
+/* 
+ * MIXINS
+ */
+
 .escondetxt(@where:-9999px){
   text-indent: @where;
   overflow: hidden;
@@ -82,4 +85,12 @@
   -webkit-column-count: @arguments;
   -moz-column-count: @arguments;
   column-count: @arguments;
+}
+.keyframes(@name) { 
+    @-webkit-keyframes @name {
+        .-frames(-webkit-);
+    }
+    @keyframes @name {
+        .-frames();
+    }
 }
