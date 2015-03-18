@@ -100,29 +100,17 @@ module.exports = function(grunt) {
     'ftp-deploy': {
       build: {
         auth: {
-          host: 'myservername.domain',
+          host: 'hostname/IP',
           port: 21,
           authKey: 'key'
         },
-        src: '/Applications/MAMP/htdocs/simple-grunt-workflow/',
-        dest: '/public_html/simple-grunt-workflow/',
+        dest: '/html/<%= pkg.directory %>/', 
+        src: 'dist/',
         exclusions: [
-          '/Applications/MAMP/htdocs/simple-grunt-workflow/**/.*',
-          '/Applications/MAMP/htdocs/simple-grunt-workflow/**/.*/', 
-          '/Applications/MAMP/htdocs/simple-grunt-workflow/**/Thumbs.db',
-          '/Applications/MAMP/htdocs/simple-grunt-workflow/**/ftppass',
-          '/Applications/MAMP/htdocs/simple-grunt-workflow/node_modules',
-          '/Applications/MAMP/htdocs/simple-grunt-workflow/*.json',
-          '/Applications/MAMP/htdocs/simple-grunt-workflow/Gruntfile.js',
-          '/Applications/MAMP/htdocs/simple-grunt-workflow/src'
+        '**/.*',
+        '**/Thumbs.db'
         ]
       }
-    },
-    open : {
-        dev : {
-          path: 'http://localhost/simple-grunt-workflow/dist/',
-          app: 'Google Chrome'
-        }
     },
     watch: {
       options: {
@@ -169,9 +157,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-ftp-deploy');
-  grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-newer');
   grunt.loadNpmTasks('grunt-spritesmith');
-  grunt.registerTask('default', ['bowercopy','newer:uglify','concat','sprite','newer:less','newer:image','watch']);
+  grunt.registerTask('default', ['bowercopy','newer:uglify','concat','sprite','newer:less','newer:image']);
   grunt.registerTask("testjs", ["jshint"]);
 };
