@@ -1,0 +1,105 @@
+/* ==========================================================================
+   BeerJS.cl
+   coder: @csslab
+   startdate: 20150428
+   ========================================================================== */
+
+@import "inc/normalize";
+@import "inc/mixins.scss";
+@import "inc/fonts.scss";
+@import "inc/sprites";
+@include sprites($spritesheet-sprites);
+
+// ==========================================================================
+// ==========================================================================
+
+*, :before, :after {
+  box-sizing: border-box;
+}
+body {
+  font-family:'Roboto',sans-serif;
+  color:white;
+}
+
+h1 {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  font-size: 8em;
+  color: white;
+  text-shadow: 7px 7px 0px rgba(0, 0, 0, 0.2);
+  transform: translate(-50%,-50%);
+}
+
+.beer {
+  position: absolute;  
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0 auto;
+  background: linear-gradient(90deg, #A86600 2%, #ffcc00 50%, #A36600 98%);
+  background-size: cover;
+  overflow: hidden;
+}
+
+
+.bubble {
+  position: absolute;
+  top: 100%;
+  animation: float 5s infinite ease-in;
+  backface-visibility: hidden;
+}
+
+.bubble:before {
+  display: block;
+  content: "";
+  // background: radial-gradient(circle cover at 20% 20%, rgba(255, 255, 255, 0.98) 0%, rgba(255, 255, 255, 0.95) 5%, rgba(255, 255, 255, 0) 12%, rgba(255, 255, 255, 0) 65%, rgba(34, 0, 0, 0.9) 80%);
+  background: white;
+  border-radius: 100%;
+  animation: wiggle 2s infinite ease-in-out;
+  backface-visibility: hidden;
+  opacity: .3;
+}
+
+$i: 50;
+@while $i > 0 {
+   $seed1: random(100) / 100;
+   $seed2: random(100) / 100;
+   $seed3: random(100) / 100;
+   $size: random(3) + 3;
+  
+  .bubble:nth-child(#{$i}) { 
+    left: 1% * random(100);
+    animation-delay: $seed1 * 5s;
+    animation-duration: 8.5s - $size * .75;
+  }
+  .bubble:nth-child(#{$i}):before { 
+    animation-delay: $seed2 * 2s;
+    width: 1px * $size;
+    height: 1px * $size;
+  }
+  $i: $i - 1;
+}
+
+@keyframes float  {
+  100% {
+    transform: translate3d(0, -610px, 0); 
+  }
+}
+@keyframes wiggle {
+  0% {
+    transform: translate3d(-4px, 0, 0); 
+  }
+  50% {
+    transform: translate3d(4px, 0, 0); 
+  }
+  100% {
+    transform: translate3d(-4px, 0, 0); 
+  }
+}
+
+canvas {
+  position: relative;
+  // width: 100%;
+  // height: 100%;
+}
