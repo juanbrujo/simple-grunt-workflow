@@ -16,6 +16,11 @@
   "devDependencies": {
     "detectizr": "latest",
     "modernizr": "latest",
-    "normalize.css": "latest"
+    "html5shiv": "latest",
+    "jquery": "1.11.2",
+    "selectivizr": "latest",
+    "css3pie": "latest",
+    "yui3": "latest",
+    "respond": "latest"
   }
 }

@@ -15,16 +15,30 @@ module.exports = function(grunt) {
           destPrefix: 'src/js/libs'
         },
         files: {
+          'jquery.js': 'jquery/dist/jquery.js',
+          'html5shiv.js': 'html5shiv/dist/html5shiv.js',
           'modernizr.js': 'modernizr/modernizr.js',
-          'detectizr.js': 'detectizr/dist/detectizr.js'
+          'detectizr.js': 'detectizr/dist/detectizr.js',
+          'selectivizr.js': 'selectivizr/selectivizr.js',
+          'respond.js': 'respond/dest/respond.src.js'
         },
+      },
+      folders: {
+        options: {
+          destPrefix: 'dist/assets/css/pie'
+        },
+        files: {
+          'PIE.js': 'css3pie/PIE.js',
+          'PIE.htc': 'css3pie/PIE.htc',
+          'PIE.php': 'css3pie/PIE.php'
+        }
       },
       css: {
         options: {
-          destPrefix: "src/scss/inc"
+          destPrefix: 'src/less/inc'
         },
         files: {
-          "normalize.scss": "normalize.css/normalize.css"
+          'yui3-cssreset.less': 'yui3/build/cssreset/cssreset.css'
         }
       }
     },
@@ -49,58 +63,58 @@ module.exports = function(grunt) {
       }
     },
     jshint: {
-      files: ["src/js/indianpaleale.js"],
+      files: ["src/js/functions.js"],
       options: {
         jshintrc: ".jshintrc"
       }
     },
-    imagemin: {
+    image: {
       dynamic: {
         files: [{
             expand: true,
-            cwd: "src/images/",
-            src: ["*.{png,jpg,gif,svg}"],
-            dest: "dist/assets/images/"
+            cwd: 'src/images/',
+            src: ['*.{png,jpg,gif,svg}'],
+            dest: 'dist/assets/images/'
         }]
       }
     },
     sprite:{
       all: {
-        src: "src/images/sprites/*.png",
-        dest: "src/images/sprites.png",
-        destCss: "src/scss/inc/sprites.scss",
-        algorithm: "binary-tree",
+        src: 'src/images/sprites/*.png',
+        destImg: 'src/images/sprites.png',
+        destCSS: 'src/less/inc/sprites.less',
+        algorithm: 'binary-tree',
         padding: 2
       }
     },
-    sass: {
-      build: {
+    less: {
+      dist: {
         options: {
-          style: "compressed"
+            compress: true
         },
-        files: [{
-          expand: true,
-          cwd: "src/scss",
-          src: [ "*.scss" ],
-          dest: "dist/assets/css",
-          ext: ".css"
-        }]
-      }
+        files: {
+            'dist/assets/css/style.min.css': 'src/less/style.less'
+        }
+      } 
     },
-    autoprefixer: {
-      options: {
-        browsers: ["last 2 versions", "ie 8", "ie 9"],
-        cascade: false,
-        map: true
-      },
-      target: {
-        src: "dist/assets/css/*.css"
-      },
+    'ftp-deploy': {
+      build: {
+        auth: {
+          host: 'hostname/IP',
+          port: 21,
+          authKey: 'key'
+        },
+        dest: '/html/<%= pkg.directory %>/', 
+        src: 'dist/',
+        exclusions: [
+        '**/.*',
+        '**/Thumbs.db'
+        ]
+      }
     },
     watch: {
       options: {
-        livereload: true,
-        spawn: false
+        livereload: true
       },
       scripts: {
         files: ['src/js/*.js'],
@@ -110,8 +124,8 @@ module.exports = function(grunt) {
         }
       },
       css: {
-        files: ["src/scss/*.scss"],
-        tasks: ["newer:sass","newer:autoprefixer"],
+        files: ['src/less/*.less'],
+        tasks: ['newer:less'],
         options: {
           spawn: false
         }
@@ -128,27 +142,23 @@ module.exports = function(grunt) {
       },
       another: {
         files: ['src/images/*.*'],
-        tasks: ['newer:imagemin'],
+        tasks: ['newer:image'],
         options: {
           spawn: false
         }
       }
     }
   });
-
   grunt.loadNpmTasks("grunt-contrib-concat");
   grunt.loadNpmTasks('grunt-bowercopy');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-imagemin');
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-image');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks("grunt-contrib-jshint");
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-ftp-deploy');
   grunt.loadNpmTasks('grunt-newer');
   grunt.loadNpmTasks('grunt-spritesmith');
-  grunt.loadNpmTasks('grunt-autoprefixer');
-
-
-  grunt.registerTask("init", ["bowercopy","concat"]);
-  grunt.registerTask('default', ['newer:uglify','sprite',"newer:imagemin","newer:sass"]);
+  grunt.registerTask('default', ['bowercopy','newer:uglify','concat','sprite','newer:less','newer:image']);
   grunt.registerTask("testjs", ["jshint"]);
 };
