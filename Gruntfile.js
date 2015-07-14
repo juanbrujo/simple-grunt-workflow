@@ -1,12 +1,19 @@
 /**
-**
-** Basic Grunt workflow for small front-end projects
-** repo: https://github.com/juanbrujo/simple-grunt-workflow
-** article: http://www.csslab.cl/2014/04/07/automatizacion-de-tareas-para-proyectos-en-front-end/
-** @csslab / ©2014
-**
-**/
+ *
+ * Basic Grunt workflow for small front-end projects
+ * repo: https://github.com/juanbrujo/simple-grunt-workflow
+ * article: http://www.csslab.cl/2014/04/07/automatizacion-de-tareas-para-proyectos-en-front-end/
+ * @csslab / ©2014
+ *
+ */
+
 module.exports = function(grunt) {
+
+  require('time-grunt')(grunt);
+  require('jit-grunt')(grunt, {
+    sprite: 'grunt-spritesmith'
+  });
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     bowercopy: {
@@ -68,21 +75,21 @@ module.exports = function(grunt) {
         jshintrc: ".jshintrc"
       }
     },
-    image: {
+    imagemin: {
       dynamic: {
         files: [{
             expand: true,
-            cwd: 'src/images/',
-            src: ['*.{png,jpg,gif,svg}'],
-            dest: 'dist/assets/images/'
+            cwd: "src/images/",
+            src: ["*.{png,jpg,gif,svg}"],
+            dest: "dist/assets/images/"
         }]
       }
     },
     sprite:{
       all: {
         src: 'src/images/sprites/*.png',
-        destImg: 'src/images/sprites.png',
-        destCSS: 'src/less/inc/sprites.less',
+        dest: 'src/images/sprites.png',
+        destCss: 'src/less/inc/sprites.less',
         algorithm: 'binary-tree',
         padding: 2
       }
@@ -97,24 +104,10 @@ module.exports = function(grunt) {
         }
       } 
     },
-    'ftp-deploy': {
-      build: {
-        auth: {
-          host: 'hostname/IP',
-          port: 21,
-          authKey: 'key'
-        },
-        dest: '/html/<%= pkg.directory %>/', 
-        src: 'dist/',
-        exclusions: [
-        '**/.*',
-        '**/Thumbs.db'
-        ]
-      }
-    },
     watch: {
       options: {
-        livereload: true
+        livereload: true,
+        spawn: false
       },
       scripts: {
         files: ['src/js/*.js'],
@@ -142,23 +135,16 @@ module.exports = function(grunt) {
       },
       another: {
         files: ['src/images/*.*'],
-        tasks: ['newer:image'],
+        tasks: ['newer:imagemin'],
         options: {
           spawn: false
         }
       }
     }
   });
-  grunt.loadNpmTasks("grunt-contrib-concat");
-  grunt.loadNpmTasks('grunt-bowercopy');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-image');
-  grunt.loadNpmTasks('grunt-contrib-less');
-  grunt.loadNpmTasks("grunt-contrib-jshint");
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-ftp-deploy');
-  grunt.loadNpmTasks('grunt-newer');
-  grunt.loadNpmTasks('grunt-spritesmith');
-  grunt.registerTask('default', ['bowercopy','newer:uglify','concat','sprite','newer:less','newer:image']);
-  grunt.registerTask("testjs", ["jshint"]);
+
+  grunt.registerTask("init",    ["bowercopy","concat"]);
+  grunt.registerTask("default", ["newer:uglify","sprite","newer:less","newer:imagemin","watch"]);
+  grunt.registerTask("testjs",  ["jshint"]);
+
 };

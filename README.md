@@ -44,7 +44,6 @@ Es el archivo base con el cual crearemos las tareas que necesitamos corra **Grun
 - **less**: compila y minifica archivos .less
 - **bowercopy**: copia las librerías JS en /src/js/libs para su uso
 - **watch**: corre tareas definidas cada vez que se realizan cambios a ellas, en este caso todas las anteriores.
-- **ftp-deploy**: realiza subida de los archivos que indiques a un servidor definido a través de FTP.
 
 ###Uso
 
@@ -52,9 +51,9 @@ El directorio base se llama `/simple-grunt-workflow` y contiene todo lo necesari
 
 	/simple-grunt-workflow/Gruntfile.js
 	/simple-grunt-workflow/package.json
-	/simple-grunt-workflow/ftppass (este archivo cuando necesario debes renombrarlo a .ftppass)
 	/simple-grunt-workflow/dist/index.html
 	
+
 El directorio donde trabajarás tus assets se llama `/src ` y contiene:
 
 	/simple-grunt-workflow/src/js/
@@ -63,6 +62,7 @@ El directorio donde trabajarás tus assets se llama `/src ` y contiene:
 	/simple-grunt-workflow/src/images/
 	/simple-grunt-workflow/src/images/sprites/
 	
+
 Los que después de procesados por **GruntJS** residirán en `/assets` y son los que debes llamar desde tus archivos **HTML**:
 
 	/simple-grunt-workflow/dist/assets/js/
@@ -70,6 +70,7 @@ Los que después de procesados por **GruntJS** residirán en `/assets` y son los
 	/simple-grunt-workflow/dist/assets/css/
 	/simple-grunt-workflow/dist/assets/images/
 	
+
 Para comenzar a trabajar, en Terminal/Consola debes estar en el directorio que estés trabajando:
 
 	$ cd /path/to/simple-grunt-workflow/
@@ -86,13 +87,17 @@ Luego es hora de descargar las librerías **JavaScript** base y sus dependencias
 
 	$ sudo bower install
 
-Antes de correr **GruntJS**, abre **Gruntfile.js** y revisa los path que concuerden con los que estés trabajando, principamente los relacionados con **ftp-deploy** (si lo vas a utilizar). Si todo concuerda, acciona el comando:
+Antes de correr **GruntJS**, abre **Gruntfile.js** y revisa los path que concuerden con los que estés trabajando. Si todo concuerda, acciona el comando:
 
-	$ grunt
-	
+	$ grunt init
+
 ![](http://www.csslab.cl/wp-content/uploads/2014/04/2watch.png)
 
-El cual comenzará a procesar las tareas ya definidas y se quedará en **watch** esperando cambios o actualizaciones en los archivos. En este momento debes llamar el directorio de trabajo en tu browser (a través de tu servidor web local) y activar **LiveReload**. Cuando el ícono cambie es porque está sincronizado con **GruntJS** y a cada cambio en archivos **html/less/js/images** en tu proyecto, **watch** hará que se actualicen los archivos y **LiveReload** recargará el browser por tí.
+El cual comenzará a procesar las tareas iniciales principalmente de relocar los archivos .js descargados mediante bower al directorio `src/js` correspondiente. Luego para comenzar a trabajar, acciona:
+
+	$ grunt
+
+El que quedará en **watch** esperando cambios o actualizaciones en los archivos. En este momento debes llamar el directorio de trabajo en tu browser (a través de tu servidor web local) y activar **LiveReload**. Cuando el ícono cambie es porque está sincronizado con **GruntJS** y a cada cambio en archivos **html/less/js/images** en tu proyecto, **watch** hará que se actualicen los archivos y **LiveReload** recargará el browser por tí.
 
 ![](http://www.csslab.cl/wp-content/uploads/2014/04/Screen-Shot-2014-04-03-at-5.12.04-PM.png)![](http://www.csslab.cl/wp-content/uploads/2014/04/Screen-Shot-2014-04-03-at-5.13.24-PM.png)
 
@@ -106,11 +111,5 @@ A través de un nueva tarea de **GruntJS** se prueba el archivo **JavaScript** e
 
 	$ grunt testjs
 
-
-###Deploy
-
-Se adjunta el plugin **ftp-deploy** el que debe utilizarse cuando necesitas mover archivos a tu servidor productivo. Se configura en **Gruntfile.js** la URL, puerto y dónde se lee el u/p de acceso. Éstos se guardan en un archivo **ftppass** el que se adjunta, pero en tu directorio de trabajo debe guardarse como archivo oculto **.ftppass**. Además, está pre-configurado los archivos y directorios que se excluyen, como **Gruntfile.js**, **package.json**, **/assets-dev** y **/node_modules** entre otros. Cuando necesites subir a productivo tus archivos, desactivas el **watch** de **GruntJS** (`⌘+.` ó `ctrl+.`) y envías todos tus archivos al servidor con el siguiente comando:
-
-	$ grunt ftp-deploy
 
 **Happy Coding :)**

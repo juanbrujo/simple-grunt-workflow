@@ -1,6 +1,6 @@
 {
   "name": "simple-grunt-workflow",
-  "version": "0.2.5",
+  "version": "0.3.0",
   "homepage": "http://www.csslab.cl/2014/04/07/automatizacion-de-tareas-para-proyectos-en-front-end/",
   "bugs": {
     "url": "https://github.com/juanbrujo/simple-grunt-workflow/issues"
@@ -12,17 +12,19 @@
   },
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-bowercopy": "^1.1.0",
-    "grunt-contrib-concat": "^0.5.0",
-    "grunt-contrib-jshint": "^0.10.0",
-    "grunt-contrib-less": "^0.12.0",
+    "grunt-bowercopy": "^1.2.0",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-imagemin": "^0.9.4",
+    "grunt-contrib-jshint": "^0.11.2",
+    "grunt-contrib-less": "^1.0.1",
     "grunt-contrib-nodeunit": "^0.4.1",
-    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-uglify": "^0.9.1",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-ftp-deploy": "^0.1.4",
-    "grunt-image": "^0.8.5",
-    "grunt-newer": "^0.7.0",
-    "grunt-spritesmith": "^2.20.0"
+    "grunt-newer": "^1.1.1",
+    "grunt-spritesmith": "^4.7.1",
+    "jit-grunt": "^0.9.1",
+    "load-grunt-tasks": "^3.2.0",
+    "time-grunt": "^1.2.1"
   },
   "scripts": {
     "test": "grunt testjs --verbose"
